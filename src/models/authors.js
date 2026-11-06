@@ -48,7 +48,16 @@ const authorHasBooks = async (id) => {
     return book !== null;
 };
 
+const authorExists = async (id) => {
+    const db = getDb();
+    const collection = db.collection('authors');
+    const author = await collection.findOne({ id }, { projection: { _id: 1 } });
+
+    return author !== null;
+};
+
 export {
+    authorExists,
     authorHasBooks,
     createAuthor,
     deleteAuthor,
